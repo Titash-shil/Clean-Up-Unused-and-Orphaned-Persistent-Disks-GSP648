@@ -10,11 +10,11 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Titash-shil/Offloading-Financial-Mainframe-Data-into-BigQuery-and-Elastic-Search-GSP1153/refs/heads/main/qwiklab_explorers_gsp1153.sh
+curl -LO raw.githubusercontent.com/Titash-shil/Clean-Up-Unused-and-Orphaned-Persistent-Disks-GSP648/refs/heads/main/qwiklab_explorers_gsp648.sh
 
-sudo chmod +x qwiklab_explorers_gsp1153.sh
+sudo chmod +x qwiklab_explorers_gsp648.sh
 
-./qwiklab_explorers_gsp1153.sh
+./qwiklab_explorers_gsp648.sh
 ```
 
 ---
