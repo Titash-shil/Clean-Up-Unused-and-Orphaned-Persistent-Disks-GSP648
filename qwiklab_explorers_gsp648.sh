@@ -89,81 +89,10 @@ gcloud compute instances detach-disk disk-instance --device-name=$ORPHANED_DISK 
 
 gcloud compute disks describe $ORPHANED_DISK --zone=$ZONE --format=json | jq
 
+
 echo "${GREEN}${BOLD}
 
 Task 3 Completed
-
-${RESET}"
-
-
-#TASK 4
-
-pip install -U werkzeug
-
-sed -i "15c\project = '$DEVSHELL_PROJECT_ID'" main.py
-
-sed -i '$a\werkzeug==2.2.2' requirements.txt
-
-echo "${GREEN}${BOLD}
-
-Task 4 Completed
-
-${RESET}"
-
-#TASK 5
-
-gcloud functions deploy delete_unattached_pds --trigger-http --runtime=python39  --allow-unauthenticated 
-
-export FUNCTION_URL=$(gcloud functions describe delete_unattached_pds --format=json | jq -r '.httpsTrigger.url')
-
-echo "${GREEN}${BOLD}
-
-Task 5 Completed
-
-${RESET}"
-
-
-#TASK 6
-
-gcloud app create --region=$REGION 
-
-gcloud scheduler jobs create http unattached-pd-job \
---schedule="* 2 * * *" \
---uri=$FUNCTION_URL \
---location=$REGION
-
-gcloud scheduler jobs run unattached-pd-job \
---location=$REGION
-
-gcloud compute snapshots list
-
-
-gcloud compute disks list
-
-
-gcloud app create --region=us-central1 
-
-gcloud scheduler jobs create http unattached-pd-job \
---schedule="* 2 * * *" \
---uri=$FUNCTION_URL \
---location=us-central1
-
-gcloud scheduler jobs run unattached-pd-job \
---location=us-central1
-
-gcloud compute snapshots list
-
-gcloud compute disks list
-
-
-gcloud compute disks create $ORPHANED_DISK --project=$PROJECT_ID --type=pd-standard --size=500GB --zone=$ZONE
-
-gcloud compute instances attach-disk disk-instance --device-name=$ORPHANED_DISK --disk=$ORPHANED_DISK --zone=$ZONE
-
-
-echo "${GREEN}${BOLD}
-
-Task 6 Completed
 
 Lab Completed !!!
 
